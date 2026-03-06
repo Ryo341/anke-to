@@ -1,0 +1,17 @@
+﻿1) Google Apps Script を新規作成し、`gas/Code.gs` の内容を貼り付けて保存。
+2) 右上「デプロイ」→「新しいデプロイ」→種類「ウェブアプリ」。
+3) 実行ユーザー: 自分。
+4) アクセスできるユーザー: 全員。
+5) デプロイ後に発行された Web アプリ URL をコピー。
+6) `index.html` の `GAS_WEB_APP_URL` を差し替え。
+   対象: `C:\Users\abery\Desktop\anime-dj-cosplay-survey\index.html`
+7) `images` フォルダにキャラクター画像を配置。
+   ファイル名: `chara-left.png` / `chara-center.png` / `chara-right.png`
+8) `index.html` をブラウザで開いて送信テスト。
+
+備考:
+- `CHARACTER_IMAGES` は `left` / `center` / `right` の3スロット。`url: ""` は非表示です。
+- ローカル画像を使う場合は `./images/*.png` を推奨。
+- 外部URL画像を使う場合は、画像ファイルの直接URLを指定してください（ページURLは不可）。
+- `no-cors` 送信のためフロント側でレスポンス本文は読めません。
+- メールが届かない場合は GAS の「実行ログ」を確認してください。
