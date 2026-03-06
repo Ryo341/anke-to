@@ -62,7 +62,7 @@
       position: relative;
       width: min(1100px, 100vw);
       margin: 0 auto;
-      padding: 14px 12px 36px;
+      padding: 14px 12px 20px;
     }
 
     .glow-line {
@@ -127,6 +127,13 @@
       inset: 0;
       pointer-events: none;
       z-index: 2;
+    }
+
+    .character-front-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
     }
 
     .character-slot {
@@ -277,17 +284,26 @@
     }
 
     @media (max-width: 860px) {
+      .hero {
+        padding-bottom: 180px;
+      }
+
+      .form-card {
+        margin-top: 120px;
+      }
+
       .character-slot {
         width: min(34vw, 160px);
       }
 
       .character-slot[data-slot="center"] {
-        --w: min(52vw, 220px) !important;
-        --x: -10% !important;
+        --w: min(58vw, 250px) !important;
+        --x: -6% !important;
         --y: 120px !important;
         --start-transform: translateY(12px) !important;
         --end-transform: translateY(0) !important;
         top: auto !important;
+        z-index: 4;
         display: block;
       }
     }
@@ -331,6 +347,7 @@
     <div class="glow-line" aria-hidden="true"></div>
     <section class="hero">
       <div id="characterLayer" class="character-layer" aria-hidden="true"></div>
+      <div id="characterFrontLayer" class="character-front-layer" aria-hidden="true"></div>
 
       <div class="hero-head">
         <p class="eyebrow">ANIME DJ COSPLAY EVENT</p>
@@ -491,7 +508,8 @@
     }
 
     function renderCharacterImages() {
-      const layer = pick("characterLayer");
+      const backLayer = pick("characterLayer");
+      const frontLayer = pick("characterFrontLayer");
       const status = pick("status");
       CHARACTER_IMAGES.forEach((item, i) => {
         if (!item.url) return;
@@ -511,7 +529,11 @@
           status.textContent = "キャラクター画像の読み込みに失敗しました。画像ファイルの配置を確認してください。";
         };
         wrap.appendChild(img);
-        layer.appendChild(wrap);
+        if (item.slot === "center" || item.slot === "right") {
+          frontLayer.appendChild(wrap);
+        } else {
+          backLayer.appendChild(wrap);
+        }
       });
     }
 
