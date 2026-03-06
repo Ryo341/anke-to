@@ -282,7 +282,13 @@
       }
 
       .character-slot[data-slot="center"] {
-        display: none;
+        --w: min(52vw, 220px) !important;
+        --x: -10% !important;
+        --y: 120px !important;
+        --start-transform: translateY(12px) !important;
+        --end-transform: translateY(0) !important;
+        top: auto !important;
+        display: block;
       }
     }
 
